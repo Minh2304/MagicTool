@@ -1,0 +1,54 @@
+{
+  "rects": [
+    {
+      "field": "No",
+      "x": 74,
+      "y": 148,
+      "width": 75,
+      "height": 75
+    },
+    {
+      "field": "Zone3==D(A/B)",
+      "x": 185,
+      "y": 148,
+      "width": 149,
+      "height": 75
+    },
+    {
+      "field": "Working Floor",
+      "x": 370,
+      "y": 148,
+      "width": 149,
+      "height": 75
+    },
+    {
+      "field": "Name",
+      "x": 555,
+      "y": 148,
+      "width": 186,
+      "height": 75
+    }
+  ],
+  "fields": [
+    "No",
+    "Group",
+    "Part",
+    "Gen",
+    "Name",
+    "Title",
+    "CL",
+    "Working Floor",
+    "Zone3==D(A/B)",
+    "Date",
+    "Time Week",
+    "Work Type",
+    "Worktime",
+    "Overtime",
+    "Actual OT/ Year",
+    "Actual OT/ Month",
+    "         Working continuity         ",
+    "   Reason   ",
+    "     Đăng ký thời gian làm việc - plan ",
+    " Note "
+  ]
+}
