@@ -1,9 +1,9 @@
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QTabWidget, QWidget, QVBoxLayout,
     QLabel, QLineEdit, QTextEdit, QFrame, QPushButton, QFileDialog,
-    QHBoxLayout
+    QHBoxLayout, QMessageBox
 )
-from PySide6.QtCore import Qt, QTimer
+from PySide6.QtCore import Qt, QTimer, QEvent
 from PySide6.QtGui import QColor
 from drawing_tab import DrawingTab
 from back_end import eu
@@ -45,13 +45,17 @@ class MainWindow(QMainWindow):
         self.next_btn.clicked.connect(self.next_sentence)
         self.header_layout.addWidget(self.next_btn)
 
-        # Nút Lưu 💾
-        self.save_btn = QPushButton("💾 Lưu file")
+        # Nút Xuất Excel
+        self.save_btn = QPushButton("Xuất Excel")
         self.save_btn.setFixedSize(100, 32)
-        self.save_btn.clicked.connect(self.save_sentence)
+        self.save_btn.clicked.connect(self.export_excel)
         self.header_layout.addWidget(self.save_btn)
 
         self.header.setLayout(self.header_layout)
+
+        # Font mặc định cho QTextEdit (đặt sớm để on_done có thể sử dụng)
+        self.text_font_point_size = 11
+        QApplication.instance().installEventFilter(self)
 
         # Tab 2: Vẽ vùng
         saved_rects, saved_fields = eu.load_config()
@@ -72,6 +76,18 @@ class MainWindow(QMainWindow):
         self.tabs.addTab(self.tab2, "Vẽ vùng")
         # Đảm bảo header giãn chiều rộng đúng sau khi hiển thị
         QTimer.singleShot(0, self.update_header_width)
+
+        # Style nút bo tròn tại Trang chính
+        rounded_button_style = (
+            "QPushButton {"
+            " background-color: #2d8cff; color: white; border: none;"
+            " border-radius: 12px; padding: 6px 12px;"
+            "}"
+            "QPushButton:hover { background-color: #1f7ae0; }"
+            "QPushButton:pressed { background-color: #1667bf; }"
+        )
+        for btn in [self.prev_btn, self.next_btn, self.save_btn]:
+            btn.setStyleSheet(rounded_button_style)
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
@@ -118,7 +134,12 @@ class MainWindow(QMainWindow):
             input_box.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
             input_box.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
             input_box.setLineWrapMode(QTextEdit.WidgetWidth)
-            input_box.setStyleSheet("QTextEdit { font-size: 11pt; padding: 4px; }")
+            input_box.setStyleSheet("QTextEdit { padding: 4px; }")
+            # Đặt font Times New Roman và cỡ chữ hiện tại
+            font = input_box.font()
+            font.setFamily("Times New Roman")
+            font.setPointSize(self.text_font_point_size)
+            input_box.setFont(font)
             input_box.show()
 
             label = QLabel(name.replace("3==D", " "), self.tab1)
@@ -193,6 +214,97 @@ class MainWindow(QMainWindow):
             grid_size = self.logicalDpiX() // 2.54
             reserved_height = grid_size * 3
             self.header.setGeometry(0, 0, self.tab1.width(), reserved_height)
+
+    def apply_text_font(self):
+        if not hasattr(self, 'field_widgets'):
+            return
+        for widget in self.field_widgets.values():
+            font = widget.font()
+            font.setFamily("Times New Roman")
+            font.setPointSize(self.text_font_point_size)
+            widget.setFont(font)
+
+    def eventFilter(self, obj, event):
+        try:
+            if event.type() == QEvent.Wheel and QApplication.keyboardModifiers() & Qt.ControlModifier:
+                # Xác định widget đang focus là QTextEdit (viewport cũng được tính)
+                focus_widget = QApplication.focusWidget()
+                is_text_focus = isinstance(focus_widget, QTextEdit) or (
+                    hasattr(self, 'field_widgets') and any(w.hasFocus() for w in getattr(self, 'field_widgets', {}).values())
+                )
+                if is_text_focus:
+                    delta = event.angleDelta().y()
+                    if delta > 0:
+                        self.text_font_point_size = min(self.text_font_point_size + 1, 36)
+                    elif delta < 0:
+                        self.text_font_point_size = max(self.text_font_point_size - 1, 8)
+                    self.apply_text_font()
+                    return True
+        except Exception as e:
+            print(f"DEBUG: eventFilter error: {e}")
+        return super().eventFilter(obj, event)
+
+    def closeEvent(self, event):
+        try:
+            # Đảm bảo đóng mọi popup/top-level widget còn mở
+            try:
+                if hasattr(self, 'tab2') and hasattr(self.tab2, 'popup') and self.tab2.popup is not None:
+                    self.tab2.popup.hide()
+                    self.tab2.popup.close()
+            except Exception:
+                pass
+            for w in QApplication.topLevelWidgets():
+                if w is not self:
+                    try:
+                        w.close()
+                    except Exception:
+                        pass
+        finally:
+            event.accept()
+            QApplication.instance().quit()
+
+    def export_excel(self):
+        # Lưu thay đổi hiện tại vào bộ nhớ trước khi xuất
+        try:
+            self.save_current_sentence()
+        except Exception as e:
+            print(f"DEBUG: save_current_sentence error before export: {e}")
+
+        if not getattr(self.sm, 'fields', []) or not getattr(self.sm, 'sentences', []):
+            QMessageBox.warning(self, "Xuất Excel", "Không có dữ liệu để xuất.")
+            return
+
+        file_path, _ = QFileDialog.getSaveFileName(self, "Chọn nơi lưu Excel", "", "Excel Files (*.xlsx)")
+        if not file_path:
+            return
+
+        # Đảm bảo đuôi .xlsx
+        if not file_path.lower().endswith('.xlsx'):
+            file_path += '.xlsx'
+
+        # Chuẩn bị dữ liệu theo đúng thứ tự cột như file đầu vào
+        columns = [col.replace("3==D", "\n") for col in self.sm.fields]
+        rows = []
+        for sentence in self.sm.sentences:
+            row = []
+            for field in self.sm.fields:
+                value = sentence.get(field)
+                row.append(value.replace("3==D", "\n") if isinstance(value, str) else value)
+            rows.append(row)
+
+        # Ghi Excel bằng pandas; nếu thiếu thư viện thì báo lỗi rõ ràng
+        try:
+            import pandas as pd
+            import numpy as np  # An toàn cho dữ liệu trống
+            df = pd.DataFrame(rows, columns=columns)
+            # Tránh NaN hiển thị lạ trong Excel
+            df = df.replace({np.nan: ""})
+            df.to_excel(file_path, index=False)
+            QMessageBox.information(self, "Xuất Excel", "Xuất Excel thành công.")
+        except ImportError:
+            QMessageBox.critical(self, "Thiếu thư viện", "Thiếu pandas để xuất Excel. Vui lòng cài đặt:\n\npy -m pip install pandas openpyxl")
+        except Exception as e:
+            QMessageBox.critical(self, "Lỗi", f"Không thể xuất Excel:\n{e}")
 
 if __name__ == "__main__":
     import sys

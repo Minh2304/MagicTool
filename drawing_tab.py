@@ -2,7 +2,7 @@ import os
 
 from PySide6.QtWidgets import (
     QWidget, QHBoxLayout, QPushButton, QVBoxLayout, QListWidget,
-    QListWidgetItem, QMenu, QFrame, QScrollArea, QFileDialog, QMessageBox
+    QListWidgetItem, QMenu, QFrame, QScrollArea, QFileDialog, QMessageBox, QLineEdit, QLabel
 )
 import requests
 from PySide6.QtGui import QColor
@@ -25,23 +25,56 @@ class DrawingTab(QWidget):
 
         # Cửa sổ overlay (nút nằm phía trên canvas)
         self.overlay = QWidget(self)
-        self.overlay.setGeometry(10, 10, 200, 40)
+        self.overlay.setGeometry(10, 10, 520, 72)
         self.overlay.setStyleSheet("background-color: rgba(255,255,255,0.8); border: 1px solid gray;")
         self.overlay.setAttribute(Qt.WA_TransparentForMouseEvents, False)
 
-        overlay_layout = QHBoxLayout(self.overlay)  # Đổi từ QVBoxLayout thành QHBoxLayout
+        overlay_layout = QVBoxLayout(self.overlay)
+        overlay_layout.setContentsMargins(8, 6, 8, 6)
+        overlay_layout.setSpacing(6)
 
+        # Dòng trên: Label + Ô nhập IP server API
+        ip_row = QHBoxLayout()
+        ip_row.setSpacing(6)
+        self.ip_label = QLabel("IP server", self)
+        self.ip_label.setStyleSheet("QLabel { background-color: #f2f6ff; border-radius: 8px; padding: 4px 8px; color: #1f3b75; }")
+        self.ip_input = QLineEdit(self)
+        self.ip_input.setPlaceholderText("IP API")
+        self.ip_input.setText("107.98.33.94")
+        self.ip_input.setFixedWidth(180)
+        ip_row.addWidget(self.ip_label)
+        ip_row.addWidget(self.ip_input)
+        ip_row.addStretch(1)
+        overlay_layout.addLayout(ip_row)
+
+        # Dòng dưới: các nút chức năng
+        button_row = QHBoxLayout()
+        button_row.setSpacing(6)
         self.toggle_button = QPushButton("List")
         self.toggle_button.clicked.connect(self.toggle_field_popup)
-        overlay_layout.addWidget(self.toggle_button)
+        button_row.addWidget(self.toggle_button)
 
         self.import_button = QPushButton("Import")
         self.import_button.clicked.connect(self.import_excel_file)
-        overlay_layout.addWidget(self.import_button)
+        button_row.addWidget(self.import_button)
 
         self.done_button = QPushButton("Hoàn tất")
         self.done_button.clicked.connect(self.handle_done_clicked)
-        overlay_layout.addWidget(self.done_button)
+        button_row.addWidget(self.done_button)
+        button_row.addStretch(1)
+        overlay_layout.addLayout(button_row)
+
+        # Bo tròn đẹp cho các nút
+        rounded_button_style = (
+            "QPushButton {"
+            " background-color: #2d8cff; color: white; border: none;"
+            " border-radius: 12px; padding: 6px 12px;"
+            "}"
+            "QPushButton:hover { background-color: #1f7ae0; }"
+            "QPushButton:pressed { background-color: #1667bf; }"
+        )
+        for btn in [self.toggle_button, self.import_button, self.done_button]:
+            btn.setStyleSheet(rounded_button_style)
 
         # Popup danh sách trường (ẩn/hiện bên dưới nút)
         self.popup = QFrame(self)
@@ -141,8 +174,10 @@ class DrawingTab(QWidget):
 
         try:
             # Gửi file Excel lên server
+            ip = self.ip_input.text().strip() or "107.98.33.94"
+            url = f"http://{ip}:5000/upload_excel"
             with open(file_path, 'rb') as f:
-                response = requests.post("http://192.168.88.140:5000/upload_excel", files={'file': f})
+                response = requests.post(url, files={'file': f})
             if response.status_code != 200:
                 raise Exception(response.json().get('error', 'Unknown error'))
 
@@ -170,7 +205,7 @@ class DrawingTab(QWidget):
             if os.path.exists(self.txt_path):
                 reply = QMessageBox.question(
                     self, "File đã tồn tại",
-                    "File data.txt đã tồn tại. Bạn có muốn tiếp tục làm không?",
+                    "File data.txt đã tồn tại. Bạn có muốn tiếp tục làm không?\nNhấn No để ghi đè lên file cũ",
                     QMessageBox.Yes | QMessageBox.No
                 )
                 if reply == QMessageBox.Yes:

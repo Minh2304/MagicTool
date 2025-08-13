@@ -11,7 +11,7 @@ No	Group	Part	Gen	Name	Title	CL	Working Floor	Zone3==D(A/B)	Date	Time Week	Work 
 9	S/W Platform 2G	Language AI P	23507351	Đinh Thị Kim Liên	Engineer I	CL2	11F	A	2025-05-07 00:00:00	Weekend	Special	04:00:00	04:00:00	166	0.0	6		12.0	
 10	S/W Platform 2G	Language AI P	23507362	Nguyễn Hồng Quân	Engineer I	CL2	11F	A	2025-05-07 00:00:00	Weekend	Special	04:00:00	04:00:00	140	0.0	6		12.0	
 11	S/W Platform 2G	Language AI P	23507380	Ninh Thị Tươi	Engineer I	CL2	11F	A	2025-05-07 00:00:00	Weekend	Special	04:00:00	04:00:00	155	0.0	6		12.0	
-12	S/W Platform 2G	Language AI P	23525852	Nguyễn Văn Minh3==DNguyễn Văn Minh hehe	Engineer I	CL2	11F	A	2025-05-07 00:00:00	Weekend	Special	04:00:00	04:00:00	138.33	0.0	6		10.0	Thi Pro
+12	S/W Platform 2G	Language AI P	23525852	Nguyễn Văn Minh3==DNguyễn Văn Minh	Engineer I	CL2	11F	A	2025-05-07 00:00:00	Weekend	Special	04:00:00	04:00:00	138.33	0.0	6		10.0	Thi Pro
 13	S/W Platform 2G	Language AI P	23525869	Nguyễn Hồng Tâm	Engineer I	CL2	11F	A	2025-05-07 00:00:00	Weekend	Special	04:00:00	04:00:00	143.83	0.0	6		12.0	
 14	S/W Platform 2G	Language AI P	24518128	Lý Thảo Ly	Professional ll	CL2	11F	A	2025-05-07 00:00:00	Weekend	Special	04:00:00	04:00:00	127.8	0.0	6		8.0	
 15	S/W Platform 2G	Language AI P	25502723	Nguyễn Thảo My	Professional ll	CL2	11F	A	2025-05-07 00:00:00	Weekend	Special	04:00:00	04:00:00	3.16	0.0	6		6.0	OFF sáng

@@ -9,7 +9,12 @@ class GridCanvas(QWidget):
         self.setMinimumSize(600, 600)
 
         self.dpi = self.logicalDpiX()
-        self.grid_size = int(self.dpi / 2.54)
+        # Đảm bảo grid_size luôn hợp lệ (>0)
+        try:
+            calculated = int(self.dpi / 2.54)
+        except Exception:
+            calculated = 0
+        self.grid_size = max(calculated, 10)
 
         self.occupied_cells = set()
         self.rects = []  # (QRect, QColor, field_name)
@@ -102,14 +107,21 @@ class GridCanvas(QWidget):
             self.update()
 
     def paintEvent(self, event):
+        # Tránh vẽ khi widget chưa sẵn sàng
+        if self.width() <= 0 or self.height() <= 0 or self.grid_size <= 0:
+            return
+
         painter = QPainter(self)
+        if not painter.isActive():
+            return
+
         # Tô nền 3 hàng đầu
         frozen_rect = QRect(0, 0, self.width(), self.grid_size * 3)
         painter.fillRect(frozen_rect, QColor(200, 200, 200))  # Xám đậm hơn lưới
         self.draw_grid(painter)
         self.draw_rects(painter)
 
-        if self.active_field and self.start_point:
+        if self.active_field and self.start_point and self.end_point:
             temp_rect = QRect(self.start_point, self.end_point).normalized()
             painter.setPen(QPen(Qt.red, 1, Qt.DashLine))
             painter.drawRect(temp_rect)
@@ -135,11 +147,14 @@ class GridCanvas(QWidget):
 
     def draw_rects(self, painter):
         for rect, color, field in self.rects:
+            if rect.width() <= 0 or rect.height() <= 0:
+                continue
             painter.setPen(QPen(color, 2))
             painter.drawRect(rect)
             painter.setFont(QFont("Arial", 10))
             display_field = field.replace("3==D", " ")  # Replace 3==D thành dấu cách
-            painter.drawText(rect.topLeft() + QPoint(4, -4), display_field)
+            top_left = rect.topLeft() + QPoint(4, 14)
+            painter.drawText(top_left, display_field)
 
     def is_in_frozen_area(self, rect: QRect) -> bool:
         top_row = rect.top() // self.grid_size

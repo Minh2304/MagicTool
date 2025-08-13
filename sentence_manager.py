@@ -61,8 +61,11 @@ class SentenceManager:
             for sentence in self.sentences:
                 row = []
                 for field in self.fields:
-                    # Không strip để giữ nguyên khoảng trắng người dùng nhập; chỉ thay \n bằng 3==D
-                    value = sentence.get(field).replace("\n", "3==D")
+                    # Không strip để giữ nguyên khoảng trắng người dùng nhập
+                    # Khi ghi TXT: thay \n -> 3==D, và thay tab -> dấu cách để không vỡ cột TSV
+                    value = sentence.get(field)
+                    if isinstance(value, str):
+                        value = value.replace("\n", "3==D").replace("\t", " ")
                     row.append(value)
                 f.write("\t".join(row) + "\n")
 

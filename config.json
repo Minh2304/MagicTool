@@ -27,6 +27,13 @@
       "y": 148,
       "width": 186,
       "height": 75
+    },
+    {
+      "field": "Title",
+      "x": 74,
+      "y": 259,
+      "width": 223,
+      "height": 112
     }
   ],
   "fields": [
