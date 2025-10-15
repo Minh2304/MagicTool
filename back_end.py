@@ -1,11 +1,21 @@
 import os
+import sys
 import json
 from PySide6.QtCore import QRect
 
 class EngineerUnderground:
     def __init__(self):
         self.main_ui = None
-        self.config_path = os.path.join(os.path.dirname(__file__), "config.json")
+        
+        # Lấy thư mục chứa file .exe hoặc script đang chạy
+        if getattr(sys, 'frozen', False):
+            # Nếu chạy từ file .exe (PyInstaller)
+            app_dir = os.path.dirname(sys.executable)
+        else:
+            # Nếu chạy từ script Python
+            app_dir = os.path.dirname(os.path.abspath(__file__))
+        
+        self.config_path = os.path.join(app_dir, "config.json")
 
     def save_config(self, rects, fields=None):
         data = {

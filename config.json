@@ -1,61 +1,86 @@
 {
   "rects": [
     {
-      "field": "No",
-      "x": 74,
+      "field": "1. Climate & Atmosphere (Khí hậu & Khí quyển)**3==D3==D* Biến đổi khí hậu (Climate change)3==D* Khí nhà kính (Greenhouse gases)3==D* Ô nhiễm không khí (Air pollution)3==D* Tầng ozone và chất lượng không khí (Ozone layer, air quality)3==D* Thích ứng & giảm thiểu biến đổi khí hậu (Adaptation & mitigation)",
+      "x": 37,
       "y": 148,
-      "width": 75,
-      "height": 75
+      "width": 296,
+      "height": 74
     },
     {
-      "field": "Zone3==D(A/B)",
-      "x": 185,
-      "y": 148,
-      "width": 149,
-      "height": 75
-    },
-    {
-      "field": "Working Floor",
+      "field": "2. Water & Marine Environment (Tài nguyên nước & Môi trường biển)**3==D3==D* Chất lượng nước (Water quality)3==D* Nguồn nước ngọt, sông, hồ, nước ngầm3==D* Ô nhiễm nước (Water pollution)3==D* Đại dương, biển và vùng ven biển (Marine & coastal environment)3==D* Vi nhựa, rác thải biển, sinh vật biển",
       "x": 370,
       "y": 148,
-      "width": 149,
-      "height": 75
+      "width": 296,
+      "height": 74
     },
     {
-      "field": "Name",
-      "x": 555,
+      "field": "3. Land, Soil & Agriculture (Đất đai, Đất nông nghiệp & Canh tác)**3==D3==D* Thoái hóa đất, xói mòn, sa mạc hóa3==D* Ô nhiễm đất (Soil contamination)3==D* Quản lý sử dụng đất (Land use management)3==D* Nông nghiệp bền vững, trồng trọt hữu cơ3==D* Phát triển đô thị và môi trường đất",
+      "x": 703,
       "y": 148,
-      "width": 186,
-      "height": 75
+      "width": 296,
+      "height": 74
     },
     {
-      "field": "Title",
-      "x": 74,
+      "field": "4. Biodiversity & Ecosystems (Đa dạng sinh học & Hệ sinh thái)**3==D3==D* Bảo tồn loài, bảo vệ rừng, động thực vật quý hiếm3==D* Suy thoái hệ sinh thái, mất môi trường sống3==D* Rừng, đồng cỏ, vùng ngập nước3==D* Khôi phục và phục hồi thiên nhiên (Restoration ecology)3==D* Dịch vụ hệ sinh thái (Ecosystem services)",
+      "x": 1036,
+      "y": 148,
+      "width": 296,
+      "height": 74
+    },
+    {
+      "field": "5. Energy & Resources (Năng lượng & Tài nguyên)**3==D3==D* Năng lượng tái tạo (gió, mặt trời, thủy điện, sinh khối)3==D* Hiệu quả năng lượng, tiết kiệm năng lượng3==D* Khai thác tài nguyên (dầu, khí, khoáng sản)3==D* Tiêu thụ năng lượng & phát thải carbon3==D* Nền kinh tế carbon thấp",
+      "x": 1369,
+      "y": 148,
+      "width": 296,
+      "height": 74
+    },
+    {
+      "field": "6. Waste, Pollution & Chemicals (Chất thải, Ô nhiễm & Hóa chất)**3==D3==D* Quản lý rác thải sinh hoạt & công nghiệp3==D* Rác thải nguy hại, chất độc hại3==D* Ô nhiễm tiếng ồn, ánh sáng, nhiệt3==D* Ô nhiễm công nghiệp, kim loại nặng3==D* Quản lý hóa chất & an toàn môi trường",
+      "x": 37,
       "y": 259,
-      "width": 223,
-      "height": 112
+      "width": 296,
+      "height": 74
+    },
+    {
+      "field": "7. Circular Economy & Sustainability (Kinh tế tuần hoàn & Phát triển bền vững)**3==D3==D* Giảm – Tái sử dụng – Tái chế (3R)3==D* Sử dụng tài nguyên hiệu quả (Resource efficiency)3==D* Sản phẩm xanh, tiêu dùng bền vững3==D* Chuỗi cung ứng xanh (Green supply chain)3==D* Mục tiêu phát triển bền vững (SDGs)",
+      "x": 370,
+      "y": 259,
+      "width": 296,
+      "height": 74
+    },
+    {
+      "field": "8. Environment & Human Health (Môi trường & Sức khỏe con người)**3==D3==D* Ảnh hưởng của ô nhiễm đến sức khỏe3==D* Bệnh liên quan môi trường (ô nhiễm, hóa chất, nước bẩn)3==D* Chất độc, kim loại nặng, thuốc trừ sâu3==D* Tiếng ồn đô thị, ánh sáng nhân tạo3==D* Sức khỏe tinh thần & biến đổi khí hậu3==D",
+      "x": 703,
+      "y": 259,
+      "width": 296,
+      "height": 74
+    },
+    {
+      "field": "9. Environmental Policy & Governance (Chính sách & Quản trị môi trường)**3==D3==D* Luật và quy định môi trường3==D* Cơ chế quốc tế (COP, IPCC, UNFCCC, SDGs)3==D* Quản trị môi trường (Environmental governance)3==D* Chính sách khí hậu quốc gia & địa phương3==D* Giáo dục & truyền thông môi trường",
+      "x": 1036,
+      "y": 259,
+      "width": 296,
+      "height": 74
+    },
+    {
+      "field": "10. Urban Environment & Green Living (Môi trường đô thị & Lối sống xanh)**3==D3==D* Quy hoạch xanh, thành phố bền vững3==D* Giao thông xanh, giảm phát thải đô thị3==D* Không gian xanh, cây xanh đô thị3==D* Công nghệ xanh, nhà thông minh, tiết kiệm năng lượng3==D* Lối sống xanh, tiêu dùng thân thiện môi trường",
+      "x": 1369,
+      "y": 259,
+      "width": 296,
+      "height": 74
     }
   ],
   "fields": [
-    "No",
-    "Group",
-    "Part",
-    "Gen",
-    "Name",
-    "Title",
-    "CL",
-    "Working Floor",
-    "Zone3==D(A/B)",
-    "Date",
-    "Time Week",
-    "Work Type",
-    "Worktime",
-    "Overtime",
-    "Actual OT/ Year",
-    "Actual OT/ Month",
-    "         Working continuity         ",
-    "   Reason   ",
-    "     Đăng ký thời gian làm việc - plan ",
-    " Note "
+    "1. Climate & Atmosphere (Khí hậu & Khí quyển)**3==D3==D* Biến đổi khí hậu (Climate change)3==D* Khí nhà kính (Greenhouse gases)3==D* Ô nhiễm không khí (Air pollution)3==D* Tầng ozone và chất lượng không khí (Ozone layer, air quality)3==D* Thích ứng & giảm thiểu biến đổi khí hậu (Adaptation & mitigation)",
+    "2. Water & Marine Environment (Tài nguyên nước & Môi trường biển)**3==D3==D* Chất lượng nước (Water quality)3==D* Nguồn nước ngọt, sông, hồ, nước ngầm3==D* Ô nhiễm nước (Water pollution)3==D* Đại dương, biển và vùng ven biển (Marine & coastal environment)3==D* Vi nhựa, rác thải biển, sinh vật biển",
+    "3. Land, Soil & Agriculture (Đất đai, Đất nông nghiệp & Canh tác)**3==D3==D* Thoái hóa đất, xói mòn, sa mạc hóa3==D* Ô nhiễm đất (Soil contamination)3==D* Quản lý sử dụng đất (Land use management)3==D* Nông nghiệp bền vững, trồng trọt hữu cơ3==D* Phát triển đô thị và môi trường đất",
+    "4. Biodiversity & Ecosystems (Đa dạng sinh học & Hệ sinh thái)**3==D3==D* Bảo tồn loài, bảo vệ rừng, động thực vật quý hiếm3==D* Suy thoái hệ sinh thái, mất môi trường sống3==D* Rừng, đồng cỏ, vùng ngập nước3==D* Khôi phục và phục hồi thiên nhiên (Restoration ecology)3==D* Dịch vụ hệ sinh thái (Ecosystem services)",
+    "5. Energy & Resources (Năng lượng & Tài nguyên)**3==D3==D* Năng lượng tái tạo (gió, mặt trời, thủy điện, sinh khối)3==D* Hiệu quả năng lượng, tiết kiệm năng lượng3==D* Khai thác tài nguyên (dầu, khí, khoáng sản)3==D* Tiêu thụ năng lượng & phát thải carbon3==D* Nền kinh tế carbon thấp",
+    "6. Waste, Pollution & Chemicals (Chất thải, Ô nhiễm & Hóa chất)**3==D3==D* Quản lý rác thải sinh hoạt & công nghiệp3==D* Rác thải nguy hại, chất độc hại3==D* Ô nhiễm tiếng ồn, ánh sáng, nhiệt3==D* Ô nhiễm công nghiệp, kim loại nặng3==D* Quản lý hóa chất & an toàn môi trường",
+    "7. Circular Economy & Sustainability (Kinh tế tuần hoàn & Phát triển bền vững)**3==D3==D* Giảm – Tái sử dụng – Tái chế (3R)3==D* Sử dụng tài nguyên hiệu quả (Resource efficiency)3==D* Sản phẩm xanh, tiêu dùng bền vững3==D* Chuỗi cung ứng xanh (Green supply chain)3==D* Mục tiêu phát triển bền vững (SDGs)",
+    "8. Environment & Human Health (Môi trường & Sức khỏe con người)**3==D3==D* Ảnh hưởng của ô nhiễm đến sức khỏe3==D* Bệnh liên quan môi trường (ô nhiễm, hóa chất, nước bẩn)3==D* Chất độc, kim loại nặng, thuốc trừ sâu3==D* Tiếng ồn đô thị, ánh sáng nhân tạo3==D* Sức khỏe tinh thần & biến đổi khí hậu3==D",
+    "9. Environmental Policy & Governance (Chính sách & Quản trị môi trường)**3==D3==D* Luật và quy định môi trường3==D* Cơ chế quốc tế (COP, IPCC, UNFCCC, SDGs)3==D* Quản trị môi trường (Environmental governance)3==D* Chính sách khí hậu quốc gia & địa phương3==D* Giáo dục & truyền thông môi trường",
+    "10. Urban Environment & Green Living (Môi trường đô thị & Lối sống xanh)**3==D3==D* Quy hoạch xanh, thành phố bền vững3==D* Giao thông xanh, giảm phát thải đô thị3==D* Không gian xanh, cây xanh đô thị3==D* Công nghệ xanh, nhà thông minh, tiết kiệm năng lượng3==D* Lối sống xanh, tiêu dùng thân thiện môi trường"
   ]
 }
